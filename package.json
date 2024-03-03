@@ -38,6 +38,10 @@
       {
         "command": "colorvariabletracker.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "colorvariabletracker.scanDocument",
+        "title": "scanDocument"
       }
     ]
   },
