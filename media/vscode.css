@@ -55,12 +55,17 @@ button {
   background: var(--vscode-button-background);
 }
 
-button:hover {
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+button:not(:disabled):hover {
   cursor: pointer;
   background: var(--vscode-button-hoverBackground);
 }
 
-button:focus {
+button:not(:disabled):focus {
   outline-color: var(--vscode-focusBorder);
 }
 
@@ -131,6 +136,9 @@ th {
   z-index: 1;
 }
 
+.colorBox.hidden {
+  display: none;
+}
 
 .colorBox:hover::before {
   display: block;
@@ -145,4 +153,42 @@ th {
   bottom: 0;
   background-color: var(--vscode-editor-background);
   opacity: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+.search-bar #myButton {
+  width: 70px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#searchInput {
+  padding-right: 25px;
+}
+
+#btnSearch {
+  z-index: 1;
+}
+
+#btnClear {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  font-size: 8px;
+  border-radius: 50%;
 }
