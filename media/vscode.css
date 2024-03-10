@@ -89,3 +89,60 @@ input::placeholder,
 textarea::placeholder {
   color: var(--vscode-input-placeholderForeground);
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+.colorBox {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-right: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.colorBox:hover {
+  border: 1px solid #000;
+}
+
+.colorBox::before {
+  content: attr(data-color);
+  position: absolute;
+  width: max-content;
+  font-size: 10px;
+  top: 80%;
+  left: 120%;
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-foreground);
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1;
+}
+
+
+.colorBox:hover::before {
+  display: block;
+}
+
+.colorBox::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--vscode-editor-background);
+  opacity: 0;
+}
