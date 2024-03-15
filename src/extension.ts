@@ -5,8 +5,8 @@ import { SidebarProvider } from './SidebarProvider';
 export function activate(context: vscode.ExtensionContext) {
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
 
-	const registerCommand = vscode.commands.registerCommand('colorvariabletracker.register', () => {
-		sidebarProvider.registerColorFilePath();
+	const registerCommand = vscode.commands.registerCommand('colorvariabletracker.register', (e) => {
+		sidebarProvider.register();
 	});
 
 	context.subscriptions.push(registerCommand);

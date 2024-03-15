@@ -29,12 +29,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     this._searchText = '';
   }
 
-  public update(doc?: vscode.TextDocument) {
+  public async update(doc?: vscode.TextDocument) {
     if (!doc) return;
     else if (doc.uri.path !== this._colorFilePath) return;
 
     this._doc = doc;
-    this._docText = this.formatColorVariables(doc.getText());
+    this._docText = await this.getColorVariables();
 
     if (this._view) {
       this._view.webview.html = this.getHtmlForWebview(this._view.webview);
@@ -50,7 +50,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         vscode.window.showErrorMessage('Please set a color file path in /.vscode/settings.json');
       } else if (!filePath.includes('.css') && !filePath.includes('.scss')) {
         vscode.window.showErrorMessage('Color file must be a .css or .scss file');
-      } else if (`${this._baseFilePath}/${filePath}` !== this._colorFilePath) {
+      } else {
         this._colorFilePath = `${this._baseFilePath}/${filePath}`;
         vscode.window.showInformationMessage(`Color file path is set to ${this._colorFilePath}`);
       } 
@@ -66,8 +66,13 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   private async getColorVariables() {
     if (!this._colorFilePath) return '';
 
-    const document = await vscode.workspace.openTextDocument(this._colorFilePath);
-    return this.formatColorVariables(document.getText());
+    try {
+      const document = await vscode.workspace.openTextDocument(this._colorFilePath);
+      return this.formatColorVariables(document.getText());
+    } catch (error) {
+      return 'No color variables found in the file.';
+    }
+    
   }
 
   public async resolveWebviewView(webviewView: vscode.WebviewView) {
@@ -85,6 +90,18 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(this.onReceiveMessage.bind(this));
 
     this._view = webviewView;
+  }
+
+  /** 
+   * @description: This function is used to register the color file path and update the webview with the color variables
+   * */ 
+  public async register() {
+    await this.registerColorFilePath();
+    this._doc = vscode.workspace.textDocuments.find((doc) => doc.uri.path === this._colorFilePath);
+    this._docText = await this.getColorVariables();
+    if (this._view) {
+      this._view.webview.html = this.getHtmlForWebview(this._view.webview);
+    }
   }
 
   private async onReceiveMessage(data: { type: string; value?: any }) {
@@ -184,7 +201,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         </thead>
         <button id="btnOpen">Open Color File</button>
         <tbody>
-          ${ this._docText || 'No color variables found' }
+          ${ this._docText }
         </tbody>
       </table>
       <script>
