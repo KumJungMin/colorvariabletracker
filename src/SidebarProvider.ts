@@ -20,72 +20,71 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
   _doc?: vscode.TextDocument;
   _docText?: any;
-  _baseColorFile?: string;
+  _baseFilePath?: string;
+  _settingFilePath?: string;
+  _colorFilePath?: string;
   _searchText?: string;
 
   constructor(private readonly _extensionUri: vscode.Uri ) {
-    this.init();
-  }
-
-  private async init() {
-    /** if variable is initialized in the constructor, function can access the variable  */
-    this._docText = await this.getColorVariables();
-    this._doc = vscode.workspace.textDocuments.find((doc) => doc.uri.path === this._baseColorFile);
     this._searchText = '';
-    this._view;
-
-    if (this._view) {
-      this._view.webview.html = this.getHtmlForWebview(this._view.webview);
-    }
   }
 
   public update(doc?: vscode.TextDocument) {
     if (!doc) return;
-    else if (doc.uri.path !== this._baseColorFile) return;
+    else if (doc.uri.path !== this._colorFilePath) return;
 
     this._doc = doc;
     this._docText = this.formatColorVariables(doc.getText());
 
-
-
     if (this._view) {
       this._view.webview.html = this.getHtmlForWebview(this._view.webview);
     }
+  }
+
+  public registerColorFilePath() {
+    new Promise((resolve, reject) => {
+      const config = vscode.workspace.getConfiguration('colorVariablePicker');
+      const filePath = config.get('filePath');
+
+      if (!filePath) {
+        vscode.window.showErrorMessage('Please set a color file path in /.vscode/settings.json');
+      } else if (!filePath.includes('.css') && !filePath.includes('.scss')) {
+        vscode.window.showErrorMessage('Color file must be a .css or .scss file');
+      } else if (`${this._baseFilePath}/${filePath}` !== this._colorFilePath) {
+        this._colorFilePath = `${this._baseFilePath}/${filePath}`;
+        vscode.window.showInformationMessage(`Color file path is set to ${this._colorFilePath}`);
+      } 
+      resolve('');
+    });
   }
 
   public revive(panel: vscode.WebviewView) {
     this._view = panel;
   }
 
-  private async getColorVariables() {
-    const editor = vscode.window.activeTextEditor;
-    if (editor) {
-      const rootPath = vscode.workspace.workspaceFolders?.[0];
 
-      // TODO: 파일 찾는 로직 수정하기 - 외부에서 파일 경로를 지정할 수 있게
-      const baseColorFiles = [
-        `${rootPath?.uri.path}/color.scss`,
-        `${rootPath?.uri.path}/src/colors.scss`,
-        `${rootPath?.uri.path}/src/styles/color.scss`,
-      ];
-      const colorFile = baseColorFiles.find((file) => {
-        return vscode.workspace.textDocuments.find((doc) =>  doc.uri.path === file);
-      });
-      if (colorFile) {
-        this._baseColorFile = colorFile;
-        const document = await vscode.workspace.openTextDocument(colorFile);
-        return this.formatColorVariables(document.getText());
-      }
-    }
+  private async getColorVariables() {
+    if (!this._colorFilePath) return '';
+
+    const document = await vscode.workspace.openTextDocument(this._colorFilePath);
+    return this.formatColorVariables(document.getText());
   }
 
   public async resolveWebviewView(webviewView: vscode.WebviewView) {
-    this._view = webviewView;
+    this._baseFilePath = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
+    this._settingFilePath = `${this._baseFilePath}/.vscode/settings.json`;
+    await this.registerColorFilePath();
+    
+    this._docText = await this.getColorVariables();
+    this._doc = vscode.workspace.textDocuments.find((doc) => doc.uri.path === this._colorFilePath);
+    
     webviewView.webview.options = { enableScripts: true, localResourceRoots: [this._extensionUri] };
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
-
+    
     /** class this binding: it is necessary to bind the class to the function  */ 
     webviewView.webview.onDidReceiveMessage(this.onReceiveMessage.bind(this));
+
+    this._view = webviewView;
   }
 
   private async onReceiveMessage(data: { type: string; value?: any }) {
@@ -98,13 +97,12 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         break;
       }
 
-      // TODO: 파일 찾는 로직 수정하기 - 외부에서 파일 경로를 지정할 수 있게
       case "openFile": {
-        if (!this._baseColorFile) {
+        if (!this._colorFilePath) {
           vscode.window.showErrorMessage("Color file not found");
           return;
         }
-        vscode.workspace.openTextDocument(this._baseColorFile);
+        vscode.workspace.openTextDocument(this._colorFilePath);
         break;
       }
       
@@ -186,7 +184,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         </thead>
         <button id="btnOpen">Open Color File</button>
         <tbody>
-          ${this._docText}
+          ${ this._docText || 'No color variables found' }
         </tbody>
       </table>
       <script>

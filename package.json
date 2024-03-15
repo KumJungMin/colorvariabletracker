@@ -36,12 +36,8 @@
     },
     "commands": [
       {
-        "command": "colorvariabletracker.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "colorvariabletracker.scanDocument",
-        "title": "scanDocument"
+        "command": "colorvariabletracker.register",
+        "title": "register"
       }
     ]
   },
