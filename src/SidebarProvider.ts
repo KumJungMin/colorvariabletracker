@@ -119,7 +119,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           vscode.window.showErrorMessage("Color file not found");
           return;
         }
-        vscode.workspace.openTextDocument(this._colorFilePath);
+        vscode.window.showTextDocument(vscode.Uri.file(this._colorFilePath));
         break;
       }
       
