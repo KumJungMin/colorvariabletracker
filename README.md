@@ -1,4 +1,4 @@
-# <img width="60px" src="./docs/logo.png"></a> colorvariabletracker
+# <img width="60px" src="./media/logo.png"></a> colorvariabletracker
 
 <p align="center"><img src="./docs/cover.jpg"></a></p>
 
