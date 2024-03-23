@@ -3,6 +3,11 @@
   "displayName": "colorVariableTracker",
   "description": "Tracks global color variables.",
   "version": "0.0.1",
+  "url": "https://github.com/KumJungMin/colorvariabletracker",
+  "author": {
+    "name": "KumJungMin",
+    "email": "today.as.fresh@gmail.com"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
