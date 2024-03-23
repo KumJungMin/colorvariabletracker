@@ -3,7 +3,7 @@
   "displayName": "colorVariableTracker",
   "description": "Tracks global color variables.",
   "publisher": "KumJungMinlux",
-  "icon": "docs/logo.png",
+  "icon": "./media/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/KumJungMin/colorvariabletracker"
@@ -13,7 +13,7 @@
     "variable",
     "tracker"
 	],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "KumJungMin",
     "email": "today.as.fresh@gmail.com"
