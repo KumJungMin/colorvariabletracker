@@ -1,6 +1,6 @@
-# <img width="60px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/logo.png"></a> colorvariabletracker
+# <img width="60px" src="./docs/logo.png"></a> colorvariabletracker
 
-<p align="center"><img src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/cover.jpg"></a></p>
+<p align="center"><img src="./docs/cover.jpg"></a></p>
 
 - **colorvariabletracker**는 특정 SCSS, CSS 파일의 컬러 변수를 추적할 수 있습니다.
 - 기능은 컬러 변수 리스트 보기, 변수명이나 컬러값으로 컬러 검색하기, 추적하고 있는 컬러파일 바로가기 입니다.
@@ -18,7 +18,7 @@
 - vscode 사이드바 영역에서 선언된 컬러 변수를 표 형태로 볼 수 있습니다.
 - _You can view the color variables declared in the vscode sidebar area in table form._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/listView.png"></p>
+<p align="center"><img width="850px" src="./docs/listView.png"></p>
 
 <br/>
 
@@ -27,7 +27,7 @@
 - 변수명 혹은 컬러값으로 선언된 컬러변수 리스트를 볼 수 있습니다.
 - _You can see a list of color variables declared by variable name or color value._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/search.gif"></p>
+<p align="center"><img width="850px" src="./docs/search.gif"></p>
 
 <br/>
 
@@ -36,7 +36,7 @@
 - 현재 추적하고 있는 컬러 파일을 열 수 있습니다.
 - _You can open the color file you are currently tracking._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/gotofile.gif"></p>
+<p align="center"><img width="850px" src="./docs/gotofile.gif"></p>
 
 <br/>
 
@@ -45,7 +45,7 @@
 - 현재 추적하고 있는 컬러값을 수정하면, 리스트에 변경된 값이 반영됩니다.
 - _If you modify the color value currently being tracked, the changed value will be reflected in the list._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/dynamicChange.gif"></p>
+<p align="center"><img width="850px" src="./docs/dynamicChange.gif"></p>
 
 <br/>
 
@@ -54,7 +54,7 @@
 - 리스트에서 컬러 변수의 컬러를 클릭으로 바로 복사할 수 있습니다.
 - _You can copy the color of the color variable in the list by clicking on it._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/copyColor.gif"></p>
+<p align="center"><img width="850px" src="./docs/copyColor.gif"></p>
 
 <br/><br/>
 
@@ -76,7 +76,7 @@
 - 그 다음, vscode의 command palette에서 명령어(`register`)를 입력하면, 사이드바가 업데이트됩니다.
 - _Next, when you enter the command (`register`) in vscode's command palette, the sidebar is updated._
 
-<p align="center"><img width="850px" src="https://github.com/KumJungMin/colorvariabletracker/blob/master/docs/command.png"></p>
+<p align="center"><img width="850px" src="./docs/command.png"></p>
 
 <br/><br/>
 

@@ -2,8 +2,11 @@
   "name": "colorvariabletracker",
   "displayName": "colorVariableTracker",
   "description": "Tracks global color variables.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KumJungMin/colorvariabletracker"
+  },
   "version": "0.0.1",
-  "url": "https://github.com/KumJungMin/colorvariabletracker",
   "author": {
     "name": "KumJungMin",
     "email": "today.as.fresh@gmail.com"
