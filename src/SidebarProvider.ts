@@ -48,10 +48,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
       if (!filePath) {
         vscode.window.showErrorMessage('Please set a color file path in /.vscode/settings.json');
-      } else if (!filePath.includes('.css') && !filePath.includes('.scss')) {
-        vscode.window.showErrorMessage('Color file must be a .css or .scss file');
+      } else if (!filePath.includes('.css') && !filePath.includes('.scss') && !filePath.includes('.sass')) {
+        vscode.window.showErrorMessage('Color file must be a .css or .scss or .sass file.');
       } else {
-        this._colorFilePath = `${this._baseFilePath}/${filePath}`;
+        this._colorFilePath = `${this._baseFilePath}${filePath}`;
         vscode.window.showInformationMessage(`Color file path is set to ${this._colorFilePath}`);
       } 
       resolve('');
