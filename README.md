@@ -1,71 +1,88 @@
-# colorvariabletracker README
+# <img width="60px" src="./docs/logo.png"></a> colorvariabletracker
+<p align="center"><img src="./docs/cover.jpg"></a></p>
 
-This is the README for your extension "colorvariabletracker". After writing up a brief description, we recommend including the following sections.
+- **colorvariabletracker**는 특정 SCSS, CSS 파일의 컬러 변수를 추적할 수 있습니다.
+- 기능은 컬러 변수 리스트 보기, 변수명이나 컬러값으로 컬러 검색하기, 추적하고 있는 컬러파일 바로가기 입니다.
+- 컬러 변수는 변경시 동적으로 리스트가 업데이트됩니다.
+- ***colorvariabletracker** can track color variables in specific SCSS and CSS files.*
+- *The functions are to view a list of color variables, search for colors by variable name or color value, and shortcut to the color file being tracked.*
+- *When color variables change, the list is dynamically updated.*
+
+
+<br/>
+
+
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### 1. 컬러 변수 리스트 보기, **View color variable list**
 
-For example if there is an image subfolder under your extension project workspace:
+- vscode 사이드바 영역에서 선언된 컬러 변수를 표 형태로 볼 수 있습니다.
+- *You can view the color variables declared in the vscode sidebar area in table form.*
 
-\!\[feature X\]\(images/feature-x.png\)
+<p align="center"><img width="850px" src="./docs/listView.png"></p>
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+<br/>
 
-## Requirements
+### 2. 검색하기, **Search**
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- 변수명 혹은 컬러값으로 선언된 컬러변수 리스트를 볼 수 있습니다.
+- *You can see a list of color variables declared by variable name or color value.*
+
+<p align="center"><img width="850px" src="./docs/search.gif"></p>
+
+<br/>
+
+### 3. 파일 바로가기, **Go to file**
+
+- 현재 추적하고 있는 컬러 파일을 열 수 있습니다.
+- *You can open the color file you are currently tracking.*
+
+<p align="center"><img width="850px" src="./docs/gotofile.gif"></p>
+
+<br/>
+
+### 4. 동적으로 값 변경 적용, **Apply value changes dynamically**
+
+- 현재 추적하고 있는 컬러값을 수정하면, 리스트에 변경된 값이 반영됩니다.
+- *If you modify the color value currently being tracked, the changed value will be reflected in the list.*
+
+<p align="center"><img width="850px" src="./docs/dynamicChange.gif"></p>
+
+<br/>
+
+### 5. 컬러 복사하기, **Copy color**
+
+- 리스트에서 컬러 변수의 컬러를 클릭으로 바로 복사할 수 있습니다.
+- *You can copy the color of the color variable in the list by clicking on it.*
+
+<p align="center"><img width="850px" src="./docs/copyColor.gif"></p>
+
+<br/><br/>
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- extension을 사용하기 위해, 추적할 컬러 파일의 상대 경로를 지정해야 합니다.
+- `.vscode/settings.json` 에서 추적하고 싶은 컬러 파일의 상대 경로를 추가합니다.
+- *To use the extension, you must specify the relative path to the color file you want to track.*
+- *Add the relative path of the color file you want to track in `.vscode/settings.json`.*
 
-For example:
+```json
+{
+  "colorVariablePicker.filePath": "/color.scss"
+}
+```
 
-This extension contributes the following settings:
+<br/>
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- 그 다음, vscode의 command palette에서 명령어(`register`)를 입력하면, 사이드바가 업데이트됩니다.
+- *Next, when you enter the command (`register`) in vscode's command palette, the sidebar is updated.*
 
-## Known Issues
+<p align="center"><img width="850px" src="./docs/command.png"></p>
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+<br/><br/>
+
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
