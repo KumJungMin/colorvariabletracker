@@ -43,8 +43,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   public registerColorFilePath() {
     new Promise((resolve, reject) => {
-      const config = vscode.workspace.getConfiguration('colorVariablePicker');
-      const filePath = config.get('filePath');
+      const config = vscode.workspace.getConfiguration('colorVariableTracker');
+      const filePath = config.get('filePath') as string;
 
       if (!filePath) {
         vscode.window.showErrorMessage('Please set a color file path in /.vscode/settings.json');
